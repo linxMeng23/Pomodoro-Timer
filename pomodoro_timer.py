@@ -245,14 +245,14 @@ class PomodoroTimer:
         
         # ========== 间隔提醒设置 ==========
         interval_frame = tk.Frame(self.root, bg="#2C3E50")
-        interval_frame.pack(pady=8, padx=30, fill="x")
+        interval_frame.pack(pady=5, padx=30, fill="x")
         
         self.interval_enabled_var = tk.BooleanVar(value=self.config.get("interval_enabled", True))
         
         interval_check = tk.Checkbutton(
             interval_frame,
-            text="🔔 启用间隔提醒",
-            font=("微软雅黑", 11),
+            text="🔔 间隔提醒",
+            font=("微软雅黑", 10),
             fg="#ECF0F1",
             bg="#2C3E50",
             selectcolor="#34495E",
@@ -265,12 +265,47 @@ class PomodoroTimer:
         
         interval_label = tk.Label(
             interval_frame,
-            text="  每",
-            font=("微软雅黑", 11),
+            text=" 每",
+            font=("微软雅黑", 10),
             fg="#ECF0F1",
             bg="#2C3E50"
         )
         interval_label.pack(side="left")
+
+        # ========== 窗口置顶设置 ==========
+        top_frame = tk.Frame(self.root, bg="#2C3E50")
+        top_frame.pack(pady=0, padx=30, fill="x")
+
+        self.always_on_top_var = tk.BooleanVar(value=False)
+        
+        top_check = tk.Checkbutton(
+            top_frame,
+            text="📌 始终置顶",
+            font=("微软雅黑", 10),
+            fg="#ECF0F1",
+            bg="#2C3E50",
+            selectcolor="#34495E",
+            activebackground="#2C3E50",
+            activeforeground="#ECF0F1",
+            variable=self.always_on_top_var,
+            command=self.toggle_always_on_top
+        )
+        top_check.pack(side="left")
+
+        # 专注计数显示
+        self.completed_count = 0
+        self.count_label = tk.Label(
+            top_frame,
+            text=f"今日专注: {self.completed_count}",
+            font=("微软雅黑", 10),
+            fg="#F1C40F",
+            bg="#2C3E50"
+        )
+        self.count_label.pack(side="right")
+        
+        # 绑定快捷键
+        self.root.bind('<space>', lambda e: self.start_timer())
+        self.root.bind('<Escape>', lambda e: self.reset_timer())
         
         self.interval_entry = tk.Entry(
             interval_frame,
@@ -466,6 +501,11 @@ class PomodoroTimer:
         self.config["interval_enabled"] = self.interval_enabled_var.get()
         self.save_config()
     
+    def toggle_always_on_top(self):
+        """切换窗口置顶状态"""
+        is_top = self.always_on_top_var.get()
+        self.root.attributes('-topmost', is_top)
+    
     def on_sound_selected(self, event=None):
         """铃声选择变更"""
         selected = self.selected_sound_var.get()
@@ -534,7 +574,9 @@ class PomodoroTimer:
         """更新计时器显示"""
         minutes = seconds // 60
         secs = seconds % 60
-        self.timer_label.config(text=f"{minutes:02d}:{secs:02d}")
+        time_str = f"{minutes:02d}:{secs:02d}"
+        self.timer_label.config(text=time_str)
+        self.root.title(f"🍅 {time_str} - Pomodoro Timer")
         
         if self.total_seconds > 0:
             progress = ((self.total_seconds - seconds) / self.total_seconds) * 100
@@ -645,7 +687,17 @@ class PomodoroTimer:
         self.progress["value"] = 100
         
         self.play_notification_sound()
+        
+        # 更新专注次数
+        self.completed_count += 1
+        self.count_label.config(text=f"今日专注: {self.completed_count}")
+        
+        # 窗口恢复并显示提示
+        if self.root.state() == 'iconic':
+            self.root.deiconify()
+        self.root.attributes('-topmost', True)  # 临时置顶确保看到提示
         messagebox.showinfo("番茄钟", "🍅 时间到！\n\n休息一下吧！")
+        self.root.attributes('-topmost', self.always_on_top_var.get())  # 恢复之前的置顶状态
     
     def _play_sound(self, sound_path):
         """播放音频文件"""
@@ -705,6 +757,7 @@ class PomodoroTimer:
         self.time_entry.config(state="normal")
         self.interval_entry.config(state="normal")
         self.progress["value"] = 0
+        self.root.title("🍅 番茄钟 - Pomodoro Timer")
     
     def on_closing(self):
         """窗口关闭处理"""
