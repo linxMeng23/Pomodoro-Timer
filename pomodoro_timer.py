@@ -7,9 +7,13 @@
 - 自定义倒计时时间（分钟）
 - 开始/暂停/重置功能
 - 倒计时结束后播放自定义铃声
+<<<<<<< HEAD
 - 每隔指定时间播放提示音
 - 内置多种铃声可选
 - 保存用户设置
+=======
+- 保存用户设置（铃声路径）
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
 
 作者：Antigravity AI
 日期：2026-01-02
@@ -22,9 +26,12 @@ import time
 import os
 import json
 
+<<<<<<< HEAD
 # 导入内置铃声模块
 from sounds import get_builtin_sounds, get_ding_sound, get_alarm_sound, get_sound_generator
 
+=======
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
 # 尝试导入 pygame 用于音频播放
 try:
     import pygame
@@ -47,14 +54,21 @@ class PomodoroTimer:
     # 默认设置
     DEFAULT_MINUTES = 25
     DEFAULT_SOUND_PATH = ""
+<<<<<<< HEAD
     DEFAULT_INTERVAL_MINUTES = 3  # 默认每3分钟提醒一次
     DEFAULT_INTERVAL_ENABLED = True
+=======
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
     
     def __init__(self, root):
         """初始化番茄钟应用"""
         self.root = root
         self.root.title("🍅 番茄钟 - Pomodoro Timer")
+<<<<<<< HEAD
         self.root.geometry("480x680")
+=======
+        self.root.geometry("450x550")
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         self.root.resizable(False, False)
         self.root.configure(bg="#2C3E50")
         
@@ -62,6 +76,7 @@ class PomodoroTimer:
         self.is_running = False
         self.is_paused = False
         self.remaining_seconds = 0
+<<<<<<< HEAD
         self.total_seconds = 0
         self.timer_thread = None
         self.stop_event = threading.Event()
@@ -70,6 +85,10 @@ class PomodoroTimer:
         # 生成内置铃声
         self.sound_generator = get_sound_generator()
         self.builtin_sounds = get_builtin_sounds()
+=======
+        self.timer_thread = None
+        self.stop_event = threading.Event()
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         
         # 加载配置
         self.config = self.load_config()
@@ -96,10 +115,14 @@ class PomodoroTimer:
         """加载用户配置"""
         default_config = {
             "default_minutes": self.DEFAULT_MINUTES,
+<<<<<<< HEAD
             "sound_path": self.DEFAULT_SOUND_PATH,
             "interval_minutes": self.DEFAULT_INTERVAL_MINUTES,
             "interval_enabled": self.DEFAULT_INTERVAL_ENABLED,
             "selected_builtin_sound": 2  # 默认选择闹钟声
+=======
+            "sound_path": self.DEFAULT_SOUND_PATH
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         }
         
         try:
@@ -107,6 +130,10 @@ class PomodoroTimer:
             if os.path.exists(config_path):
                 with open(config_path, 'r', encoding='utf-8') as f:
                     loaded_config = json.load(f)
+<<<<<<< HEAD
+=======
+                    # 合并默认配置和加载的配置
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
                     default_config.update(loaded_config)
         except Exception as e:
             print(f"加载配置文件失败: {e}")
@@ -128,9 +155,26 @@ class PomodoroTimer:
         style = ttk.Style()
         style.theme_use('clam')
         
+<<<<<<< HEAD
         # ========== 标题区域 ==========
         title_frame = tk.Frame(self.root, bg="#2C3E50")
         title_frame.pack(pady=15)
+=======
+        # 配置按钮样式
+        style.configure('Start.TButton', 
+                       font=('微软雅黑', 12, 'bold'),
+                       padding=10)
+        style.configure('Stop.TButton', 
+                       font=('微软雅黑', 12, 'bold'),
+                       padding=10)
+        style.configure('Reset.TButton', 
+                       font=('微软雅黑', 12, 'bold'),
+                       padding=10)
+        
+        # ========== 标题区域 ==========
+        title_frame = tk.Frame(self.root, bg="#2C3E50")
+        title_frame.pack(pady=20)
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         
         title_label = tk.Label(
             title_frame,
@@ -151,13 +195,22 @@ class PomodoroTimer:
         subtitle_label.pack()
         
         # ========== 时间显示区域 ==========
+<<<<<<< HEAD
         timer_frame = tk.Frame(self.root, bg="#34495E", padx=40, pady=25)
         timer_frame.pack(pady=15, padx=30, fill="x")
+=======
+        timer_frame = tk.Frame(self.root, bg="#34495E", padx=40, pady=30)
+        timer_frame.pack(pady=20, padx=30, fill="x")
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         
         self.timer_label = tk.Label(
             timer_frame,
             text="25:00",
+<<<<<<< HEAD
             font=("Consolas", 64, "bold"),
+=======
+            font=("Consolas", 72, "bold"),
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
             fg="#E74C3C",
             bg="#34495E"
         )
@@ -170,11 +223,19 @@ class PomodoroTimer:
             fg="#95A5A6",
             bg="#34495E"
         )
+<<<<<<< HEAD
         self.status_label.pack(pady=(5, 0))
         
         # ========== 时间设置区域 ==========
         settings_frame = tk.Frame(self.root, bg="#2C3E50")
         settings_frame.pack(pady=10, padx=30, fill="x")
+=======
+        self.status_label.pack(pady=(10, 0))
+        
+        # ========== 时间设置区域 ==========
+        settings_frame = tk.Frame(self.root, bg="#2C3E50")
+        settings_frame.pack(pady=15, padx=30, fill="x")
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         
         # 时间输入
         time_frame = tk.Frame(settings_frame, bg="#2C3E50")
@@ -183,18 +244,31 @@ class PomodoroTimer:
         time_label = tk.Label(
             time_frame,
             text="⏱️ 设置时间（分钟）：",
+<<<<<<< HEAD
             font=("微软雅黑", 11),
+=======
+            font=("微软雅黑", 12),
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
             fg="#ECF0F1",
             bg="#2C3E50"
         )
         time_label.pack(side="left")
         
+<<<<<<< HEAD
+=======
+        # 时间输入验证
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         vcmd = (self.root.register(self.validate_time_input), '%P')
         
         self.time_entry = tk.Entry(
             time_frame,
+<<<<<<< HEAD
             font=("Consolas", 13),
             width=6,
+=======
+            font=("Consolas", 14),
+            width=8,
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
             justify="center",
             validate='key',
             validatecommand=vcmd
@@ -204,7 +278,11 @@ class PomodoroTimer:
         
         # 快捷时间按钮
         quick_frame = tk.Frame(settings_frame, bg="#2C3E50")
+<<<<<<< HEAD
         quick_frame.pack(fill="x", pady=8)
+=======
+        quick_frame.pack(fill="x", pady=10)
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         
         quick_times = [15, 20, 25, 30, 45, 60]
         for minutes in quick_times:
@@ -221,6 +299,7 @@ class PomodoroTimer:
             )
             btn.pack(side="left", padx=3)
         
+<<<<<<< HEAD
         # ========== 间隔提醒设置 ==========
         interval_frame = tk.Frame(self.root, bg="#2C3E50")
         interval_frame.pack(pady=8, padx=30, fill="x")
@@ -355,15 +434,44 @@ class PomodoroTimer:
             font=("微软雅黑", 9),
             textvariable=self.sound_path_var,
             width=22,
+=======
+        # ========== 铃声设置区域 ==========
+        sound_frame = tk.Frame(self.root, bg="#2C3E50")
+        sound_frame.pack(pady=10, padx=30, fill="x")
+        
+        sound_label = tk.Label(
+            sound_frame,
+            text="🔔 提示铃声：",
+            font=("微软雅黑", 12),
+            fg="#ECF0F1",
+            bg="#2C3E50"
+        )
+        sound_label.pack(side="left")
+        
+        self.sound_path_var = tk.StringVar(value=self.config.get("sound_path", ""))
+        
+        self.sound_entry = tk.Entry(
+            sound_frame,
+            font=("微软雅黑", 10),
+            textvariable=self.sound_path_var,
+            width=25,
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
             state="readonly"
         )
         self.sound_entry.pack(side="left", padx=5)
         
         browse_btn = tk.Button(
+<<<<<<< HEAD
             self.custom_sound_frame,
             text="浏览",
             font=("微软雅黑", 9),
             bg="#7F8C8D",
+=======
+            sound_frame,
+            text="选择",
+            font=("微软雅黑", 10),
+            bg="#9B59B6",
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
             fg="white",
             relief="flat",
             cursor="hand2",
@@ -371,7 +479,11 @@ class PomodoroTimer:
         )
         browse_btn.pack(side="left", padx=5)
         
+<<<<<<< HEAD
         # 显示铃声路径
+=======
+        # 显示铃声状态
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         if self.sound_path_var.get():
             sound_name = os.path.basename(self.sound_path_var.get())
             self.sound_entry.config(state="normal")
@@ -379,6 +491,7 @@ class PomodoroTimer:
             self.sound_entry.insert(0, sound_name)
             self.sound_entry.config(state="readonly")
         
+<<<<<<< HEAD
         # 初始隐藏自定义铃声框（除非已选择自定义）
         if self.selected_sound_var.get() != "自定义...":
             self.custom_sound_frame.pack_forget()
@@ -386,6 +499,11 @@ class PomodoroTimer:
         # ========== 控制按钮区域 ==========
         button_frame = tk.Frame(self.root, bg="#2C3E50")
         button_frame.pack(pady=20)
+=======
+        # ========== 控制按钮区域 ==========
+        button_frame = tk.Frame(self.root, bg="#2C3E50")
+        button_frame.pack(pady=25)
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         
         # 开始/暂停按钮
         self.start_btn = tk.Button(
@@ -417,6 +535,7 @@ class PomodoroTimer:
         )
         self.reset_btn.pack(side="left", padx=10)
         
+<<<<<<< HEAD
         # ========== 进度条 ==========
         progress_frame = tk.Frame(self.root, bg="#2C3E50")
         progress_frame.pack(pady=5, padx=30, fill="x")
@@ -429,6 +548,8 @@ class PomodoroTimer:
         )
         self.progress.pack(fill="x")
         
+=======
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         # ========== 音频后端状态 ==========
         if AUDIO_BACKEND:
             backend_text = f"音频引擎: {AUDIO_BACKEND}"
@@ -462,6 +583,7 @@ class PomodoroTimer:
         self.time_entry.insert(0, str(minutes))
         self.update_timer_display(minutes * 60)
     
+<<<<<<< HEAD
     def on_interval_toggle(self):
         """间隔提醒开关切换"""
         self.config["interval_enabled"] = self.interval_enabled_var.get()
@@ -507,6 +629,8 @@ class PomodoroTimer:
         else:
             self.fallback_system_sound()
     
+=======
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
     def browse_sound_file(self):
         """浏览并选择铃声文件"""
         filetypes = [
@@ -533,17 +657,25 @@ class PomodoroTimer:
             self.sound_entry.delete(0, tk.END)
             self.sound_entry.insert(0, sound_name)
             self.sound_entry.config(state="readonly")
+<<<<<<< HEAD
+=======
+            
+            messagebox.showinfo("铃声设置", f"已选择铃声：\n{sound_name}")
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
     
     def update_timer_display(self, seconds):
         """更新计时器显示"""
         minutes = seconds // 60
         secs = seconds % 60
         self.timer_label.config(text=f"{minutes:02d}:{secs:02d}")
+<<<<<<< HEAD
         
         # 更新进度条
         if self.total_seconds > 0:
             progress = ((self.total_seconds - seconds) / self.total_seconds) * 100
             self.progress["value"] = progress
+=======
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
     
     def start_timer(self):
         """开始或暂停计时器"""
@@ -555,6 +687,7 @@ class PomodoroTimer:
                     messagebox.showwarning("输入错误", "请输入大于0的分钟数！")
                     return
                 
+<<<<<<< HEAD
                 # 保存设置
                 self.config["default_minutes"] = minutes
                 try:
@@ -567,6 +700,13 @@ class PomodoroTimer:
                 self.remaining_seconds = minutes * 60
                 self.total_seconds = minutes * 60
                 self.last_interval_time = self.total_seconds
+=======
+                # 保存默认时间设置
+                self.config["default_minutes"] = minutes
+                self.save_config()
+                
+                self.remaining_seconds = minutes * 60
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
                 self.is_running = True
                 self.is_paused = False
                 self.stop_event.clear()
@@ -575,7 +715,10 @@ class PomodoroTimer:
                 self.start_btn.config(text="⏸ 暂停", bg="#F39C12")
                 self.status_label.config(text="计时中...", fg="#E74C3C")
                 self.time_entry.config(state="disabled")
+<<<<<<< HEAD
                 self.interval_entry.config(state="disabled")
+=======
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
                 
                 # 启动计时线程
                 self.timer_thread = threading.Thread(target=self.run_timer, daemon=True)
@@ -605,6 +748,7 @@ class PomodoroTimer:
                     break
                 if not self.is_paused:
                     self.remaining_seconds -= 1
+<<<<<<< HEAD
                     
                     # 在主线程中更新UI
                     self.root.after(0, self.update_timer_display, self.remaining_seconds)
@@ -612,6 +756,10 @@ class PomodoroTimer:
                     # 检查间隔提醒
                     if self.interval_enabled_var.get():
                         self.check_interval_reminder()
+=======
+                    # 在主线程中更新UI
+                    self.root.after(0, self.update_timer_display, self.remaining_seconds)
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
             else:
                 time.sleep(0.1)
         
@@ -619,6 +767,7 @@ class PomodoroTimer:
             # 计时结束
             self.root.after(0, self.timer_complete)
     
+<<<<<<< HEAD
     def check_interval_reminder(self):
         """检查并播放间隔提醒"""
         try:
@@ -651,6 +800,8 @@ class PomodoroTimer:
         except ValueError:
             pass
     
+=======
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
     def timer_complete(self):
         """计时完成处理"""
         self.is_running = False
@@ -660,22 +811,43 @@ class PomodoroTimer:
         self.start_btn.config(text="▶ 开始", bg="#27AE60")
         self.status_label.config(text="🎉 时间到！", fg="#27AE60")
         self.time_entry.config(state="normal")
+<<<<<<< HEAD
         self.interval_entry.config(state="normal")
         self.progress["value"] = 100
         
         # 播放结束提示音
+=======
+        
+        # 播放提示音
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         self.play_notification_sound()
         
         # 显示提示框
         messagebox.showinfo("番茄钟", "🍅 时间到！\n\n休息一下吧！")
     
+<<<<<<< HEAD
     def _play_sound(self, sound_path):
         """播放音频文件（内部方法）"""
         if not sound_path or not os.path.exists(sound_path):
+=======
+    def play_notification_sound(self):
+        """播放提示铃声"""
+        sound_path = self.sound_path_var.get()
+        
+        if not sound_path or not os.path.exists(sound_path):
+            # 如果没有设置铃声或文件不存在，使用系统提示音
+            try:
+                import winsound
+                # 播放系统默认提示音
+                winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
+            except Exception as e:
+                print(f"播放系统提示音失败: {e}")
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
             return
         
         if AUDIO_BACKEND == "pygame":
             try:
+<<<<<<< HEAD
                 # 使用 Sound 对象而不是 music，避免冲突
                 sound = pygame.mixer.Sound(sound_path)
                 sound.play()
@@ -694,6 +866,22 @@ class PomodoroTimer:
         
         if sound_path and os.path.exists(sound_path):
             threading.Thread(target=self._play_sound, args=(sound_path,), daemon=True).start()
+=======
+                pygame.mixer.music.load(sound_path)
+                pygame.mixer.music.play()
+            except Exception as e:
+                print(f"pygame播放失败: {e}")
+                self.fallback_system_sound()
+        
+        elif AUDIO_BACKEND == "playsound":
+            try:
+                # 在新线程中播放，避免阻塞UI
+                threading.Thread(target=playsound, args=(sound_path,), daemon=True).start()
+            except Exception as e:
+                print(f"playsound播放失败: {e}")
+                self.fallback_system_sound()
+        
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         else:
             self.fallback_system_sound()
     
@@ -722,15 +910,21 @@ class PomodoroTimer:
             minutes = self.config.get("default_minutes", 25)
         
         self.remaining_seconds = minutes * 60
+<<<<<<< HEAD
         self.total_seconds = minutes * 60
+=======
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         self.update_timer_display(self.remaining_seconds)
         
         # 重置按钮和状态
         self.start_btn.config(text="▶ 开始", bg="#27AE60")
         self.status_label.config(text="准备就绪", fg="#95A5A6")
         self.time_entry.config(state="normal")
+<<<<<<< HEAD
         self.interval_entry.config(state="normal")
         self.progress["value"] = 0
+=======
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
     
     def on_closing(self):
         """窗口关闭处理"""
@@ -742,6 +936,7 @@ class PomodoroTimer:
         try:
             minutes = int(self.time_entry.get())
             self.config["default_minutes"] = minutes
+<<<<<<< HEAD
         except ValueError:
             pass
         
@@ -754,6 +949,12 @@ class PomodoroTimer:
         self.config["interval_enabled"] = self.interval_enabled_var.get()
         self.save_config()
         
+=======
+            self.save_config()
+        except ValueError:
+            pass
+        
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
         self.root.destroy()
 
 
@@ -768,6 +969,17 @@ def main():
     except Exception:
         pass
     
+<<<<<<< HEAD
+=======
+    # 设置图标（可选）
+    try:
+        # 如果有图标文件，可以设置
+        # root.iconbitmap('pomodoro.ico')
+        pass
+    except Exception:
+        pass
+    
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
     app = PomodoroTimer(root)
     root.mainloop()
 

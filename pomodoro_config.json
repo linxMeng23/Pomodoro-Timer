@@ -1,7 +1,12 @@
 {
+<<<<<<< HEAD
   "default_minutes": 25,
   "sound_path": "",
   "interval_minutes": 3,
   "interval_enabled": true,
   "selected_builtin_sound": 1
+=======
+  "default_minutes": 45,
+  "sound_path": ""
+>>>>>>> 247832f203d00cacc02a0ac6850ef6709ca9aa8c
 }
