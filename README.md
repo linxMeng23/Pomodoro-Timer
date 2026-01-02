@@ -6,6 +6,8 @@
 ![Platform](https://img.shields.io/badge/Platform-Windows%2011-0078D6.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
+[English README](README_EN.md)
+
 ---
 
 ## ✨ 功能特性

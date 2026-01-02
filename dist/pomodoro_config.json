@@ -1,0 +1,7 @@
+{
+  "default_minutes": 25,
+  "sound_path": "",
+  "interval_minutes": 3,
+  "interval_enabled": true,
+  "selected_builtin_sound": 3
+}
