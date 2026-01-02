@@ -6,8 +6,6 @@
 ![Platform](https://img.shields.io/badge/Platform-Windows%2011-0078D6.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-[English README](README_EN.md)
-
 ---
 
 ## ✨ 功能特性
@@ -29,7 +27,7 @@
 
 ```
 Pomodoro Timer/
-├── pomodoro_timer.py    # 主程序文件（番茄钟应用的全部代码）
+├── pomodoro_timer.py    # 主程序文件
 ├── sounds.py            # 内置铃声生成模块
 ├── sounds/              # 内置铃声文件夹（运行后自动生成）
 │   ├── ding.wav         # 叮声（间隔提醒用）
@@ -37,20 +35,25 @@ Pomodoro Timer/
 │   ├── alarm.wav        # 闹钟声
 │   ├── chime.wav        # 风铃声
 │   └── double_beep.wav  # 双响声
+├── build.bat            # 一键打包脚本
+├── pomodoro.spec        # PyInstaller 配置文件
 ├── requirements.txt     # Python 依赖库列表
 ├── pomodoro_config.json # 用户配置文件（运行后自动生成）
-└── README.md           # 项目说明文档（本文件）
+├── README.md            # 中文说明文档（本文件）
+└── README_EN.md         # 英文说明文档
 ```
 
 ### 文件说明
 
-| 文件                   | 作用                                                                      |
-| ---------------------- | ------------------------------------------------------------------------- |
-| `pomodoro_timer.py`    | 主程序文件，包含完整的番茄钟应用代码，包括 GUI 界面、计时逻辑、音频播放等 |
-| `sounds.py`            | 内置铃声生成模块，使用纯 Python 生成 WAV 格式提示音，无需外部音频文件     |
-| `sounds/`              | 内置铃声文件夹，首次运行时自动生成，包含 5 种内置提示音                   |
-| `requirements.txt`     | 依赖列表，列出需要安装的 Python 第三方库                                  |
-| `pomodoro_config.json` | 配置文件，保存用户的默认时间、铃声和间隔提醒设置（首次运行后自动生成）    |
+| 文件                   | 作用                                                |
+| ---------------------- | --------------------------------------------------- |
+| `pomodoro_timer.py`    | 主程序文件，包含完整的番茄钟应用代码                |
+| `sounds.py`            | 内置铃声生成模块，使用纯 Python 生成 WAV 格式提示音 |
+| `sounds/`              | 内置铃声文件夹，首次运行时自动生成                  |
+| `build.bat`            | Windows 一键打包脚本                                |
+| `pomodoro.spec`        | PyInstaller 打包配置文件                            |
+| `requirements.txt`     | 依赖列表                                            |
+| `pomodoro_config.json` | 用户配置文件                                        |
 
 ---
 
@@ -73,7 +76,7 @@ Pomodoro Timer/
 | `pygame`    | 音频播放（推荐） | ⭕ 二选一              |
 | `playsound` | 音频播放（轻量） | ⭕ 二选一              |
 
-> **注意**：`tkinter` 是 Python 标准库的一部分，在 Windows 上默认已安装，无需额外安装。
+> **注意**：`tkinter` 是 Python 标准库的一部分，在 Windows 上默认已安装。
 
 ---
 
@@ -88,12 +91,9 @@ Pomodoro Timer/
 
 ### 步骤 2：安装依赖库
 
-打开命令提示符（CMD）或 PowerShell，进入项目目录，运行以下命令：
+打开命令提示符（CMD）或 PowerShell，运行以下命令：
 
 ```bash
-# 进入项目目录
-cd "f:\CodeResp\Pomodoro Timer"
-
 # 安装 pygame（推荐）
 pip install pygame
 
@@ -101,12 +101,10 @@ pip install pygame
 pip install playsound
 ```
 
-> **提示**：安装其中一个音频库即可。如果两个都没安装，程序仍可运行，但只能使用 Windows 系统提示音。
-
 ### 步骤 3：运行程序
 
 ```bash
-# 运行番茄钟
+cd "f:\CodeResp\Pomodoro Timer"
 python pomodoro_timer.py
 ```
 
@@ -125,54 +123,34 @@ python pomodoro_timer.py
 
 2. **设置铃声**：
 
-   - 点击「选择」按钮
-   - 选择本地的 MP3/WAV/OGG/FLAC 音频文件
-   - 铃声设置会自动保存
+   - 从下拉菜单选择内置铃声
+   - 或选择"自定义..."并浏览本地音频文件
+   - 点击「▶ 试听」预听铃声
 
-3. **开始计时**：
+3. **间隔提醒**：
+
+   - 勾选「🔔 启用间隔提醒」
+   - 设置提醒间隔（默认 3 分钟）
+
+4. **开始计时**：
 
    - 点击「▶ 开始」按钮开始倒计时
    - 计时过程中可点击「⏸ 暂停」暂停
    - 暂停后点击「▶ 继续」继续计时
 
-4. **重置计时**：
+5. **重置计时**：
 
    - 点击「⟲ 重置」按钮重置计时器
 
-5. **计时完成**：
+6. **计时完成**：
    - 倒计时结束后会自动播放提示铃声
    - 并弹出提示框通知用户
-
-### 界面预览
-
-```
-┌─────────────────────────────────────────────┐
-│              🍅 番茄钟                        │
-│            专注工作，高效生活                   │
-├─────────────────────────────────────────────┤
-│                                             │
-│              ┌──────────────┐                │
-│              │    25:00     │                │
-│              │   准备就绪    │                │
-│              └──────────────┘                │
-│                                             │
-│  ⏱️ 设置时间（分钟）： [  25  ]               │
-│                                             │
-│  [15分] [20分] [25分] [30分] [45分] [60分]   │
-│                                             │
-│  🔔 提示铃声： [alarm.mp3    ] [选择]        │
-│                                             │
-│      [ ▶ 开始 ]        [ ⟲ 重置 ]           │
-│                                             │
-│              音频引擎: pygame                 │
-└─────────────────────────────────────────────┘
-```
 
 ---
 
 ## ⚙️ 配置文件
 
-程序会在同目录下生成 `pomodoro_config.json` 配置文件，保存用户设置：
+程序会在同目录下生成 `pomodoro_config.json` 配置文件：
 
 ```json
 {
@@ -180,7 +158,7 @@ python pomodoro_timer.py
   "sound_path": "C:\\Users\\用户名\\Music\\alarm.mp3",
   "interval_minutes": 3,
   "interval_enabled": true,
-  "selected_builtin_sound": 2
+  "selected_builtin_sound": 3
 }
 ```
 
@@ -218,115 +196,7 @@ python pomodoro_timer.py
 
 ---
 
-## ❓ 常见问题
-
-### Q1: 程序无法启动，提示找不到 tkinter
-
-**解决方法**：重新安装 Python，确保勾选了 "tcl/tk and IDLE" 选项。
-
-### Q2: 铃声无法播放
-
-**可能原因**：
-
-1. 未安装 `pygame` 或 `playsound`
-2. 音频文件路径包含中文或特殊字符
-3. 音频文件格式不支持
-
-**解决方法**：
-
-1. 运行 `pip install pygame` 安装音频库
-2. 将音频文件移动到纯英文路径
-3. 使用 MP3 或 WAV 格式的音频文件
-
-### Q3: 界面模糊（高 DPI 屏幕）
-
-程序已内置 DPI 感知设置，应能正常显示。如仍模糊，请右键 Python 程序 → 属性 → 兼容性 → 更改高 DPI 设置 → 勾选"替代高 DPI 缩放行为"。
-
----
-
-## 📝 技术细节
-
-- **GUI 框架**：Tkinter（Python 标准库）
-- **多线程**：使用 `threading` 模块进行计时，避免阻塞 UI
-- **配置存储**：JSON 格式本地存储
-- **音频播放**：支持 `pygame` 和 `playsound` 两种后端
-- **系统集成**：支持 Windows DPI 感知
-
----
-
-## 📜 许可证
-
----
-
-## 🔊 音频支持
-
-### 支持的音频格式
-
-- MP3 (`.mp3`)
-- WAV (`.wav`)
-- OGG (`.ogg`)
-- FLAC (`.flac`)
-
-### 音频库选择
-
-| 库          | 优点                 | 缺点                 |
-| ----------- | -------------------- | -------------------- |
-| `pygame`    | 功能强大，支持格式多 | 体积较大（约 10MB）  |
-| `playsound` | 轻量简单             | 部分版本有兼容性问题 |
-
-> **推荐**：使用 `pygame`，稳定性和兼容性更好。
-
-### 备用方案
-
-如果未安装任何音频库，或音频文件无法播放，程序会自动使用 Windows 系统提示音。
-
----
-
-## ❓ 常见问题
-
-### Q1: 程序无法启动，提示找不到 tkinter
-
-**解决方法**：重新安装 Python，确保勾选了 "tcl/tk and IDLE" 选项。
-
-### Q2: 铃声无法播放
-
-**可能原因**：
-
-1. 未安装 `pygame` 或 `playsound`
-2. 音频文件路径包含中文或特殊字符
-3. 音频文件格式不支持
-
-**解决方法**：
-
-1. 运行 `pip install pygame` 安装音频库
-2. 将音频文件移动到纯英文路径
-3. 使用 MP3 或 WAV 格式的音频文件
-
-### Q3: 界面模糊（高 DPI 屏幕）
-
-程序已内置 DPI 感知设置，应能正常显示。如仍模糊，请右键 Python 程序 → 属性 → 兼容性 → 更改高 DPI 设置 → 勾选"替代高 DPI 缩放行为"。
-
----
-
-## 📝 技术细节
-
-- **GUI 框架**：Tkinter（Python 标准库）
-- **多线程**：使用 `threading` 模块进行计时，避免阻塞 UI
-- **配置存储**：JSON 格式本地存储
-- **音频播放**：支持 `pygame` 和 `playsound` 两种后端
-- **系统集成**：支持 Windows DPI 感知
-
----
-
-## 📜 许可证
-
-本项目仅供个人学习和使用。
-
----
-
 ## 📦 打包成 EXE 文件
-
-如果需要将程序打包成独立的 Windows 可执行文件，可以使用 PyInstaller。
 
 ### 方法一：使用一键打包脚本（推荐）
 
@@ -345,14 +215,19 @@ pip install pyinstaller
 ```bash
 cd "f:\CodeResp\Pomodoro Timer"
 
-# 使用 spec 配置文件打包
-pyinstaller pomodoro.spec --clean
-
-# 或者使用命令行参数打包
-pyinstaller --onefile --windowed --name "番茄钟" pomodoro_timer.py
+# 使用命令行参数打包
+pyinstaller --onefile --windowed --name "PomodoroTimer" --add-data "sounds.py;." pomodoro_timer.py
 ```
 
-#### 参数说明
+#### 步骤 3：获取打包结果
+
+打包完成后，可执行文件位于：
+
+```
+dist\PomodoroTimer.exe
+```
+
+### 打包参数说明
 
 | 参数         | 说明                                           |
 | ------------ | ---------------------------------------------- |
@@ -362,46 +237,70 @@ pyinstaller --onefile --windowed --name "番茄钟" pomodoro_timer.py
 | `--icon`     | 指定程序图标（可选，如 `--icon=pomodoro.ico`） |
 | `--clean`    | 清理临时文件后重新打包                         |
 
-#### 步骤 3：获取打包结果
-
-打包完成后，可执行文件位于：
-
-```
-dist\番茄钟.exe
-```
-
 ### 打包后的使用说明
 
 1. **首次运行**：程序会自动在 exe 所在目录创建 `sounds/` 文件夹和配置文件
-2. **分发给他人**：只需复制 `番茄钟.exe` 即可，无需安装 Python
-3. **文件大小**：打包后约 15-25 MB（包含 pygame 库）
+2. **分发给他人**：只需复制 `PomodoroTimer.exe` 即可，无需安装 Python
+3. **文件大小**：打包后约 30 MB（包含 pygame 库）
 
-### 可能遇到的问题
+---
 
-#### Q: 打包后运行闪退
+## ❓ 常见问题
+
+### Q1: 程序无法启动，提示找不到 tkinter
+
+**解决方法**：重新安装 Python，确保勾选了 "tcl/tk and IDLE" 选项。
+
+### Q2: 铃声无法播放
+
+**可能原因**：
+
+1. 未安装 `pygame` 或 `playsound`
+2. 音频文件路径包含中文或特殊字符
+3. 音频文件格式不支持
+
+**解决方法**：
+
+1. 运行 `pip install pygame` 安装音频库
+2. 将音频文件移动到纯英文路径
+3. 使用 MP3 或 WAV 格式的音频文件
+
+### Q3: 界面模糊（高 DPI 屏幕）
+
+程序已内置 DPI 感知设置。如仍模糊：右键 Python 程序 → 属性 → 兼容性 → 更改高 DPI 设置 → 勾选"替代高 DPI 缩放行为"。
+
+### Q4: 打包后运行闪退
 
 **解决方法**：使用命令行运行 exe 查看错误信息：
 
 ```bash
 cd dist
-番茄钟.exe
+PomodoroTimer.exe
 ```
 
-#### Q: 杀毒软件误报
+### Q5: 杀毒软件误报
 
 这是 PyInstaller 打包的常见问题。**解决方法**：
 
 - 将 exe 添加到杀毒软件白名单
 - 或使用代码签名证书签名 exe
 
-#### Q: 程序图标如何设置
+---
 
-1. 准备一个 `.ico` 格式的图标文件
-2. 修改 `pomodoro.spec` 文件，取消 `icon` 行的注释：
-   ```python
-   icon='pomodoro.ico',
-   ```
-3. 重新运行打包命令
+## 📝 技术细节
+
+- **GUI 框架**：Tkinter（Python 标准库）
+- **多线程**：使用 `threading` 模块进行计时，避免阻塞 UI
+- **配置存储**：JSON 格式本地存储
+- **音频播放**：支持 `pygame` 和 `playsound` 两种后端
+- **铃声生成**：纯 Python 合成 WAV 音频
+- **系统集成**：支持 Windows DPI 感知
+
+---
+
+## 📜 许可证
+
+本项目仅供个人学习和使用。
 
 ---
 

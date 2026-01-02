@@ -1,4 +1,4 @@
-# Pomodoro Timer
+# 🍅 Pomodoro Timer
 
 A clean, modern Pomodoro desktop app built with Python + Tkinter, designed for Windows 11.
 
@@ -8,99 +8,122 @@ A clean, modern Pomodoro desktop app built with Python + Tkinter, designed for W
 
 ---
 
-## Features
+## ✨ Features
 
-- Custom countdown time (1-999 minutes)
-- Quick buttons for 15/20/25/30/45/60 minutes
-- Start/pause and reset
-- Built-in notification sounds (ding, bell, alarm, chime, double beep)
-- Interval reminders with a configurable interval (default 3 minutes)
-- Custom end sound (MP3/WAV/OGG/FLAC)
-- Progress bar display
-- Auto-save user settings (time, sounds, interval reminders)
-- Modern dark UI
+- 🕐 **Custom Time**: Set countdown from 1-999 minutes
+- ⚡ **Quick Buttons**: 15/20/25/30/45/60 minute presets
+- ▶️ **Start/Pause**: One-click control
+- 🔄 **Reset**: Reset anytime
+- 🔊 **Built-in Sounds**: 5 notification sounds (Ding, Bell, Alarm, Chime, Double Beep)
+- 🔔 **Interval Reminders**: Play "ding" every N minutes (default: 3 min)
+- 🎵 **Custom Sound**: Use your own MP3/WAV/OGG/FLAC files
+- 📊 **Progress Bar**: Visual countdown progress
+- 💾 **Auto-save Settings**: Remembers your preferences
+- 🎨 **Modern Dark UI**: Beautiful dark theme design
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 Pomodoro Timer/
-├── pomodoro_timer.py    # Main app
-├── sounds.py            # Built-in sound generator
-├── sounds/              # Generated built-in sounds
+├── pomodoro_timer.py    # Main application
+├── sounds.py            # Built-in sound generator module
+├── sounds/              # Auto-generated sound files
 │   ├── ding.wav         # Interval reminder sound
-│   ├── bell.wav         # Bell
-│   ├── alarm.wav        # Alarm
-│   ├── chime.wav        # Chime
-│   └── double_beep.wav  # Double beep
+│   ├── bell.wav         # Bell sound
+│   ├── alarm.wav        # Alarm sound
+│   ├── chime.wav        # Chime sound
+│   └── double_beep.wav  # Double beep sound
+├── build.bat            # One-click build script
+├── pomodoro.spec        # PyInstaller config file
 ├── requirements.txt     # Python dependencies
-├── pomodoro_config.json # User config (auto-generated)
-└── README.md            # Chinese README
+├── pomodoro_config.json # User settings (auto-generated)
+├── README.md            # Chinese documentation
+└── README_EN.md         # English documentation (this file)
 ```
 
-### Files
+### File Descriptions
 
-| File | Purpose |
-| --- | --- |
-| `pomodoro_timer.py` | Main app: UI, timer logic, audio playback |
-| `sounds.py` | Built-in sound generator (pure Python WAV) |
-| `sounds/` | Auto-generated built-in sounds |
-| `requirements.txt` | Dependency list |
-| `pomodoro_config.json` | Stores defaults and reminder settings |
+| File                   | Purpose                                                   |
+| ---------------------- | --------------------------------------------------------- |
+| `pomodoro_timer.py`    | Main app: GUI, timer logic, audio playback                |
+| `sounds.py`            | Pure Python WAV sound generator, no external files needed |
+| `sounds/`              | Auto-generated folder with 5 built-in notification sounds |
+| `build.bat`            | Windows batch script for one-click PyInstaller packaging  |
+| `pomodoro.spec`        | PyInstaller specification file                            |
+| `requirements.txt`     | Python dependency list                                    |
+| `pomodoro_config.json` | JSON config storing user preferences                      |
 
 ---
 
-## Requirements
+## 🔧 Requirements
 
-- Python 3.8+ (recommended 3.10+)
+### Python Version
+
+- **Python 3.8+** (recommended: Python 3.10+)
+- Check version: `python --version`
+
+### Operating System
+
 - Windows 10 / Windows 11
 
-### Audio Libraries
+### Dependencies
 
-| Library | Usage | Required |
-| --- | --- | --- |
-| `tkinter` | GUI | Yes (bundled with Python) |
-| `pygame` | Audio playback (recommended) | Optional |
-| `playsound` | Audio playback (lightweight) | Optional |
+| Library     | Purpose                      | Required                     |
+| ----------- | ---------------------------- | ---------------------------- |
+| `tkinter`   | GUI framework                | ✅ Yes (bundled with Python) |
+| `pygame`    | Audio playback (recommended) | ⭕ One of these              |
+| `playsound` | Audio playback (lightweight) | ⭕ One of these              |
 
-Note: `tkinter` ships with Python on Windows.
+> **Note**: `tkinter` is included with Python on Windows by default.
 
 ---
 
-## Install and Run
+## 🚀 Installation & Running
 
-1) Install Python from https://www.python.org/downloads/ (check "Add Python to PATH").
+### Step 1: Install Python
 
-2) Install one audio library:
+Download from https://www.python.org/downloads/
+
+- ✅ Check "Add Python to PATH" during installation
+
+### Step 2: Install Audio Library
 
 ```bash
+# Recommended
 pip install pygame
-# or
+
+# OR lightweight alternative
 pip install playsound
 ```
 
-3) Run:
+### Step 3: Run the App
 
 ```bash
+cd "f:\CodeResp\Pomodoro Timer"
 python pomodoro_timer.py
 ```
 
----
-
-## Usage
-
-1) Set time in minutes or click a quick button.
-2) Choose end sound (built-in or custom file).
-3) Start/pause with the main button.
-4) Reset any time.
-5) When the timer finishes, a notification sound plays and a message box appears.
+Or simply double-click `pomodoro_timer.py`.
 
 ---
 
-## Configuration
+## 📖 How to Use
 
-The app writes `pomodoro_config.json` in the project directory:
+1. **Set Time**: Enter minutes or click a quick button (15/20/25/30/45/60)
+2. **Set Sound**: Choose from built-in sounds or select a custom file
+3. **Enable Interval Reminder**: Check the box and set reminder interval (default: 3 min)
+4. **Start**: Click "▶ 开始" (Start) button
+5. **Pause/Resume**: Click "⏸ 暂停" (Pause) / "▶ 继续" (Continue)
+6. **Reset**: Click "⟲ 重置" (Reset)
+7. **Timer Complete**: Sound plays and notification appears
+
+---
+
+## ⚙️ Configuration
+
+The app saves settings to `pomodoro_config.json`:
 
 ```json
 {
@@ -108,62 +131,158 @@ The app writes `pomodoro_config.json` in the project directory:
   "sound_path": "C:\\Users\\User\\Music\\alarm.mp3",
   "interval_minutes": 3,
   "interval_enabled": true,
-  "selected_builtin_sound": 2
+  "selected_builtin_sound": 3
 }
 ```
 
-| Key | Description |
-| --- | --- |
-| `default_minutes` | Default countdown time |
-| `sound_path` | Custom sound file path |
-| `interval_minutes` | Interval reminder minutes |
-| `interval_enabled` | Enable interval reminders |
-| `selected_builtin_sound` | Built-in sound index (1-5) |
+| Setting                  | Description                        |
+| ------------------------ | ---------------------------------- |
+| `default_minutes`        | Default countdown time in minutes  |
+| `sound_path`             | Path to custom sound file          |
+| `interval_minutes`       | Minutes between interval reminders |
+| `interval_enabled`       | Enable/disable interval reminders  |
+| `selected_builtin_sound` | Built-in sound index (1-5)         |
 
 ---
 
-## Audio Support
+## 🔊 Audio Support
 
-Supported formats: MP3, WAV, OGG, FLAC.
+### Supported Formats
 
-If no audio library is installed or the file cannot be played, the app falls back to the Windows system sound.
+- MP3 (`.mp3`)
+- WAV (`.wav`)
+- OGG (`.ogg`)
+- FLAC (`.flac`)
 
----
+### Audio Library Comparison
 
-## FAQ
+| Library     | Pros                   | Cons                      |
+| ----------- | ---------------------- | ------------------------- |
+| `pygame`    | Powerful, many formats | Larger size (~10MB)       |
+| `playsound` | Lightweight, simple    | Some compatibility issues |
 
-Q: The app fails to start with a tkinter error.
-A: Reinstall Python and ensure "tcl/tk and IDLE" is selected.
+> **Recommendation**: Use `pygame` for better stability.
 
-Q: The sound does not play.
-A: Install `pygame` or `playsound`, move the audio file to a path with ASCII characters only, and try MP3/WAV.
+### Fallback
 
-Q: The UI looks blurry on high-DPI screens.
-A: The app enables DPI awareness. If it is still blurry, set High DPI override in the Python executable properties.
-
----
-
-## Technical Notes
-
-- UI: Tkinter
-- Timer thread: `threading`
-- Config: JSON
-- Audio: `pygame` or `playsound`
-- Windows DPI awareness enabled
+If no audio library is installed or playback fails, the app uses Windows system sounds.
 
 ---
 
-## License
+## 📦 Build Standalone EXE
 
-For personal learning and use.
+### Method 1: One-Click Build (Recommended)
+
+Double-click `build.bat` to automatically build the executable.
+
+### Method 2: Manual Build
+
+#### Step 1: Install PyInstaller
+
+```bash
+pip install pyinstaller
+```
+
+#### Step 2: Build
+
+```bash
+cd "f:\CodeResp\Pomodoro Timer"
+
+# Using spec file
+pyinstaller pomodoro.spec --clean
+
+# OR using command line
+pyinstaller --onefile --windowed --name "PomodoroTimer" --add-data "sounds.py;." pomodoro_timer.py
+```
+
+#### Step 3: Get the Result
+
+```
+dist\PomodoroTimer.exe
+```
+
+### Build Parameters
+
+| Parameter    | Description                                      |
+| ------------ | ------------------------------------------------ |
+| `--onefile`  | Bundle into single EXE                           |
+| `--windowed` | No console window (required for GUI)             |
+| `--name`     | Output filename                                  |
+| `--icon`     | App icon (optional, e.g., `--icon=pomodoro.ico`) |
+| `--clean`    | Clean temp files before build                    |
+
+### After Building
+
+1. **First Run**: Auto-creates `sounds/` folder and config file in EXE directory
+2. **Distribution**: Just copy the EXE file, no Python needed
+3. **File Size**: ~30 MB (includes pygame)
 
 ---
 
-## Pomodoro Technique
+## ❓ Troubleshooting
 
-1. Choose a task
-2. Work for 25 minutes
-3. Take a 5-minute break
-4. After 4 sessions, take a 15-30 minute break
+### Q: App fails to start with tkinter error
 
-Stay focused and work efficiently.
+**Solution**: Reinstall Python and ensure "tcl/tk and IDLE" is selected.
+
+### Q: Sound doesn't play
+
+**Possible causes**:
+
+1. No audio library installed
+2. File path contains non-ASCII characters
+3. Unsupported audio format
+
+**Solution**:
+
+1. Run `pip install pygame`
+2. Move audio file to ASCII-only path
+3. Use MP3 or WAV format
+
+### Q: UI looks blurry (high DPI)
+
+The app enables DPI awareness. If still blurry: Right-click Python → Properties → Compatibility → High DPI settings → Override.
+
+### Q: EXE crashes on startup
+
+**Solution**: Run from command line to see error:
+
+```bash
+cd dist
+PomodoroTimer.exe
+```
+
+### Q: Antivirus flags the EXE
+
+This is common with PyInstaller. **Solution**: Add to whitelist or use code signing.
+
+---
+
+## 📝 Technical Details
+
+- **GUI Framework**: Tkinter (Python standard library)
+- **Threading**: `threading` module for non-blocking timer
+- **Config Storage**: JSON format
+- **Audio Playback**: `pygame` / `playsound` backends
+- **Sound Generation**: Pure Python WAV synthesis
+- **System Integration**: Windows DPI awareness
+
+---
+
+## 📜 License
+
+For personal learning and use only.
+
+---
+
+## 🎯 About Pomodoro Technique
+
+The Pomodoro Technique is a time management method:
+
+1. Choose a task to work on
+2. Set timer for 25 minutes
+3. Work until the timer rings
+4. Take a 5-minute break
+5. After 4 pomodoros, take a 15-30 minute break
+
+Stay focused and work efficiently! 🍅
