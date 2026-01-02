@@ -1,1 +1,17 @@
-.claude
+# Ignore everything
+*
+
+# Unignore files in the project root
+!pomodoro_timer.py
+!sounds.py
+!build.bat
+!pomodoro.spec
+!requirements.txt
+!pomodoro_config.json
+!README.md
+!README_EN.md
+!.gitignore
+
+# Unignore sounds directory and its contents
+!sounds/
+!sounds/*.wav
